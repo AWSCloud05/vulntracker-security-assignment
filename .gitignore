@@ -1,0 +1,41 @@
+# Python
+venv/
+.security-venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.coverage
+
+# Node.js
+node_modules/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Backups and logs
+*.backup
+*.stage1-backup
+*.log
+
+# Temporary assignment artifacts
+/1
+/home
+/test.txt
+/create-findings.sh
+/create-findings-fixed.sh
+/task3_sql_injection_test.sh
+
+# Historical scanner reports
+reports/sast.bandit.json
+reports/sast.bandit.after.json
+reports/sast.semgrep.json
+reports/sca.npm-audit.json
+reports/sca.npm-audit.after.json

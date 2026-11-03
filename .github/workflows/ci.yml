@@ -1,0 +1,57 @@
+name: VulnTracker CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      APP_ENV: development
+      SECRET_KEY: "ci-only-test-secret-key-not-for-production-123456"
+      DATABASE_URL: "sqlite:///./test_vulntracker.db"
+      PUBLIC_BASE_URL: "http://localhost:8000"
+      NOTIFY_SERVICE_URL: "http://localhost:3001"
+      NOTIFY_SERVICE_KEY: "ci-only-notify-service-key-not-for-production-123456789"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Python tests
+        run: pytest tests/ -v
+
+  test-notify:
+    runs-on: ubuntu-latest
+    env:
+      NOTIFY_SERVICE_KEY: "ci-only-notify-service-key-not-for-production-123456789"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: notify/package-lock.json
+
+      - name: Install Node.js dependencies
+        run: npm ci
+        working-directory: notify
+
+      - name: Run Node.js tests
+        run: npm test
+        working-directory: notify
