@@ -1,0 +1,72 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.3, pytest-7.4.3, pluggy-1.7.0 -- /home/osboxes/projects/asa-assignment/venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/osboxes/projects/asa-assignment
+plugins: asyncio-0.21.1, anyio-3.7.1
+asyncio: mode=Mode.STRICT
+collecting ... collected 13 items
+
+tests/test_api.py::test_health PASSED                                    [  7%]
+tests/test_api.py::test_register_user PASSED                             [ 15%]
+tests/test_api.py::test_register_duplicate_username PASSED               [ 23%]
+tests/test_api.py::test_login_success PASSED                             [ 30%]
+tests/test_api.py::test_login_wrong_password PASSED                      [ 38%]
+tests/test_api.py::test_create_scan PASSED                               [ 46%]
+tests/test_api.py::test_list_scans PASSED                                [ 53%]
+tests/test_api.py::test_search_scans PASSED                              [ 61%]
+tests/test_api.py::test_update_scan_status PASSED                        [ 69%]
+tests/test_api.py::test_delete_scan PASSED                               [ 76%]
+tests/test_api.py::test_create_and_access_public_share_link PASSED       [ 84%]
+tests/test_api.py::test_password_protected_share_link PASSED             [ 92%]
+tests/test_api.py::test_invalid_share_token PASSED                       [100%]
+
+=============================== warnings summary ===============================
+app/database.py:9
+  /home/osboxes/projects/asa-assignment/tests/../app/database.py:9: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    Base = declarative_base()
+
+app/main.py:72
+  /home/osboxes/projects/asa-assignment/tests/../app/main.py:72: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.14/migration/
+    class UserOut(BaseModel):
+
+app/main.py:99
+  /home/osboxes/projects/asa-assignment/tests/../app/main.py:99: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.14/migration/
+    class ScanOut(BaseModel):
+
+tests/test_api.py: 27 warnings
+  /home/osboxes/projects/asa-assignment/venv/lib/python3.13/site-packages/sqlalchemy/sql/schema.py:3596: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    return util.wrap_callable(lambda ctx: fn(), fn)  # type: ignore
+
+tests/test_api.py::test_login_success
+tests/test_api.py::test_create_scan
+tests/test_api.py::test_list_scans
+tests/test_api.py::test_search_scans
+tests/test_api.py::test_update_scan_status
+tests/test_api.py::test_delete_scan
+tests/test_api.py::test_create_and_access_public_share_link
+tests/test_api.py::test_password_protected_share_link
+  /home/osboxes/projects/asa-assignment/tests/../app/auth.py:31: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    expire = datetime.utcnow() + (expires_delta or timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
+
+tests/test_api.py: 13 warnings
+  /home/osboxes/projects/asa-assignment/venv/lib/python3.13/site-packages/jose/jwt.py:311: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    now = timegm(datetime.utcnow().utctimetuple())
+
+tests/test_api.py::test_update_scan_status
+  /home/osboxes/projects/asa-assignment/tests/../app/main.py:252: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    scan.updated_at = datetime.utcnow()
+
+tests/test_api.py::test_create_and_access_public_share_link
+tests/test_api.py::test_password_protected_share_link
+  /home/osboxes/projects/asa-assignment/tests/../app/main.py:342: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    expires_at=datetime.utcnow() + timedelta(hours=24),
+
+tests/test_api.py::test_create_and_access_public_share_link
+tests/test_api.py::test_password_protected_share_link
+tests/test_api.py::test_password_protected_share_link
+tests/test_api.py::test_password_protected_share_link
+  /home/osboxes/projects/asa-assignment/tests/../app/main.py:379: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    if datetime.utcnow() >= share_link.expires_at:
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================== 13 passed, 58 warnings in 77.51s (0:01:17) ==================
